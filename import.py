@@ -7,11 +7,11 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from webdriver_manager.chrome import ChromeDriverManager
 from langchain_ollama import OllamaLLM
-from langchain.chains import ConversationalRetrievalChain
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.memory import ConversationBufferMemory
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+# model_name = "qwen2.5-coder:32b"
+model_name = "llama3.2:latest"
+OLLAMA_SERVER_URL = "http://192.168.1.69:11434"
 
 # Function to initialize Selenium WebDriver
 def initialize_driver():
@@ -98,7 +98,7 @@ def is_valid_article_link(url):
     return False
 
 def check_relevance(query, content):
-    llm = OllamaLLM(model="llama3.1:latest")
+    llm = OllamaLLM(model=model_name, base_url=OLLAMA_SERVER_URL)
     prompt = f"""
     Analyze if the following content is relevant to the topic: '{query}'
     Consider:
@@ -111,11 +111,12 @@ def check_relevance(query, content):
 
     Respond with Yes or No and a brief explanation.
     """
+    print (f"asking prompt {prompt}")
     response = llm.invoke(prompt)
     return "yes" in response.lower()
 
 def extract_relevant_information(query, content):
-    llm = OllamaLLM(model="llama3.1:latest")
+    llm = OllamaLLM(model=model_name, base_url=OLLAMA_SERVER_URL)
     
     # Split content into manageable chunks
     text_splitter = RecursiveCharacterTextSplitter(

@@ -1,3 +1,5 @@
 venv
 docs
 processed_docs
+__pycache__
+write*

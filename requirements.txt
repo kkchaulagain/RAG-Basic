@@ -13,6 +13,7 @@ cffi==1.17.1
 chardet==5.2.0
 charset-normalizer==3.4.0
 click==8.1.7
+colorama==0.4.6
 cryptography==43.0.3
 dataclasses-json==0.6.7
 emoji==2.14.0

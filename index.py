@@ -14,7 +14,7 @@ CORS(app,
          "supports_credentials": True
      }})
 
-OLLAMA_API_URL = "http://localhost:11434/api/chat"
+OLLAMA_API_URL = "http://192.168.1.68:11434/api/chat"
 OLLAMA_MODEL = "llama3.1:latest"
 
 def get_llama_response(prompt):
